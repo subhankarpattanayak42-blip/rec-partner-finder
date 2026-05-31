@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>REC Event Partner Finder</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Splash / Loading Screen -->
+    <div id="splash" class="splash">
+        <div class="splash-content">
+            <div class="splash-icon">🎯</div>
+            <h1>REC Event Partner Finder</h1>
+            <p class="splash-sub">Powered by REC MatchAI™ v2.4.1</p>
+            <div class="loader-bar"><div class="loader-fill"></div></div>
+            <p class="splash-status">Initializing matching engine...</p>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="app hidden">
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-inner">
+                <div class="logo">
+                    <span class="logo-icon">🎯</span>
+                    <span class="logo-text">REC<span class="logo-light">Match</span></span>
+                </div>
+                <div class="header-badge">BETA</div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <div class="hero-icon">💞</div>
+                <h2>Find Your Perfect<br/><span class="highlight">REC Event Partner</span></h2>
+                <p class="hero-sub">Smart AI matching for REC freshers &amp; events. <br/>Join 2,847+ successful matches!</p>
+                <div class="hero-stats">
+                    <div class="stat"><span class="stat-num">2.8K+</span><span class="stat-label">Matches</span></div>
+                    <div class="stat"><span class="stat-num">97%</span><span class="stat-label">Satisfaction</span></div>
+                    <div class="stat"><span class="stat-num">⭐4.8</span><span class="stat-label">Rating</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works">
+            <h3>How It Works</h3>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <p>Enter your name</p>
+                </div>
+                <div class="step-arrow">➜</div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <p>AI scans REC database</p>
+                </div>
+                <div class="step-arrow">➜</div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <p>Get your perfect match!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Match Form -->
+        <section class="match-section" id="matchSection">
+            <div class="match-card" id="formCard">
+                <div class="match-card-header">
+                    <h3>Find Your Partner</h3>
+                    <p>Fill in your details to get matched</p>
+                </div>
+                <form id="matchForm" autocomplete="off">
+                    <div class="form-group">
+                        <label for="fullName">Your Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="e.g. Arpit Sharma" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Your Gender</label>
+                        <select id="gender" name="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <select id="year" name="year">
+                            <option value="1st">1st Year</option>
+                            <option value="2nd">2nd Year</option>
+                            <option value="3rd">3rd Year</option>
+                            <option value="4th">4th Year</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="branch">Branch</label>
+                        <select id="branch" name="branch">
+                            <option value="CSE">Computer Science</option>
+                            <option value="ECE">Electronics &amp; Communication</option>
+                            <option value="EE">Electrical Engineering</option>
+                            <option value="ME">Mechanical Engineering</option>
+                            <option value="CE">Civil Engineering</option>
+                            <option value="IT">Information Technology</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">What kind of event?</label>
+                        <select id="interest" name="interest">
+                            <option value="cultural">Cultural Fest</option>
+                            <option value="tech">Tech Fest</option>
+                            <option value="sports">Sports Event</option>
+                            <option value="workshop">Workshop / Seminar</option>
+                            <option value="freshers">Freshers' Party</option>
+                            <option value="other">Just a random event</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-match" id="findBtn">
+                        <span class="btn-text">Find My Partner</span>
+                        <span class="btn-loader hidden">🔍 Scanning...</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Result Card -->
+            <div class="match-card result-card hidden" id="resultCard">
+                <div class="confetti-container" id="confettiContainer"></div>
+                <div class="result-badge">✨ PERFECT MATCH FOUND ✨</div>
+                <div class="result-icon">🎉</div>
+                <h3 class="result-title">Congratulations, <span id="userNameDisplay"></span>!</h3>
+                <p class="result-subtitle">Our AI has analyzed 2,847 profiles and found your ideal partner:</p>
+
+                <div class="profile-card">
+                    <div class="profile-pic">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Subhankar&backgroundColor=b6e3f4" alt="Subhankar" />
+                    </div>
+                    <div class="profile-info">
+                        <h4 id="partnerName">Subhankar</h4>
+                        <div class="profile-tags">
+                            <span class="tag tag-green">✅ Well-mannered</span>
+                            <span class="tag tag-blue">🤝 Polite</span>
+                            <span class="tag tag-gold">⭐ 4.9 Rating</span>
+                        </div>
+                        <div class="profile-details">
+                            <div class="detail"><span>Year:</span> 3rd</div>
+                            <div class="detail"><span>Branch:</span> CSE</div>
+                            <div class="detail"><span>Interests:</span> Cultural, Tech, Helping others</div>
+                            <div class="detail"><span>Hobbies:</span> Making friends, being polite, REC events</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="compatibility">
+                    <div class="compat-header">
+                        <span>Compatibility Score</span>
+                        <span class="compat-score">99%</span>
+                    </div>
+                    <div class="compat-bar"><div class="compat-fill" style="width:99%"></div></div>
+                </div>
+
+                <div class="testimonials">
+                    <p class="testi-text">"Subhankar is literally the nicest person at REC. Always well-dressed, polite, and knows every event!"</p>
+                    <p class="testi-author">— Verified REC Student</p>
+                </div>
+
+                <div class="result-actions">
+                    <button class="btn-secondary" onclick="resetForm()">🔍 Try Again</button>
+                    <button class="btn-primary" onclick="shareMatch()">📤 Share Match</button>
+                </div>
+
+                <p class="result-footer">* Matching based on REC's internal compatibility algorithm. Results may vary.</p>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <h3>What Students Say</h3>
+            <div class="testi-cards">
+                <div class="testi-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"I was matched with Subhankar and he was the perfect event partner! So polite!"</p>
+                    <span class="testi-name">— Priya, CSE 2nd Year</span>
+                </div>
+                <div class="testi-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Best matching app ever! Got Subhankar as my partner. 10/10 would recommend!"</p>
+                    <span class="testi-name">— Rahul, ECE 3rd Year</span>
+                </div>
+                <div class="testi-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Subhankar was so well-mannered and helpful at the cultural fest. Amazing match!"</p>
+                    <span class="testi-name">— Sneha, IT 1st Year</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq-section">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <div class="faq-q">Who is Subhankar?</div>
+                <div class="faq-a">The most well-mannered, polite, and friendly guy at REC. Everyone's ideal event partner!</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Is this really AI-powered?</div>
+                <div class="faq-a">Absolutely! Our proprietary REC MatchAI™ uses advanced algorithms to find the best partner.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Can I get a different partner?</div>
+                <div class="faq-a">Our AI determines that Subhankar is statistically the best match for everyone at REC. Trust the science!</div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with 💞 for REC Events · Not affiliated with REC official</p>
+            <p class="footer-small">REC MatchAI™ v2.4.1 · This is a prank site 😉</p>
+        </footer>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
